@@ -1,13 +1,13 @@
 package org.walkmanx21.springsecurityapp.models;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Person")
@@ -28,15 +28,14 @@ public class Person {
     private String username;
 
     @Column(name = "year_of_birth")
-    @NotEmpty(message = "Год рождения пользователя не может быть пустым")
     @Min(value = 1900, message = "Год рождения пользователя должен быть больше, чем 1900")
-    @Pattern(regexp = "^[0-9]+$", message = "Год рождения пользователя должен содержать только латинские буквы и цифры")
+    @Max(value = 2025 - 18, message = "Пользователь должен быть старше 18 лет")
     private int yearOfBirth;
 
     @Column(name = "password")
     @NotEmpty
-    @Size(min = 6, max = 20, message = "Пароль должен содержать от 6 до 20 символов")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Пароль пользователя должен содержать только латинские буквы и цифры")
+//    @Size(min = 6, max = 20, message = "Пароль должен содержать от 6 до 20 символов")
+//    @Pattern(regexp = "^[a-zA-Z0-9{}]+$", message = "Пароль пользователя должен содержать только латинские буквы и цифры")
     private String password;
 
     public Person(String username, int yearOfBirth) {
