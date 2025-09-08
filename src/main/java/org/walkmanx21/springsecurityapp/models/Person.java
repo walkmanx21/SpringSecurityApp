@@ -38,6 +38,10 @@ public class Person {
 //    @Pattern(regexp = "^[a-zA-Z0-9{}]+$", message = "Пароль пользователя должен содержать только латинские буквы и цифры")
     private String password;
 
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     public Person(String username, int yearOfBirth) {
         this.username = username;
         this.yearOfBirth = yearOfBirth;

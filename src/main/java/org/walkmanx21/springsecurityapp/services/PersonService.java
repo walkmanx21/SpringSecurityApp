@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.walkmanx21.springsecurityapp.models.Person;
+import org.walkmanx21.springsecurityapp.models.Role;
 import org.walkmanx21.springsecurityapp.repositories.PersonRepository;
 import org.walkmanx21.springsecurityapp.security.PersonDetails;
 
@@ -39,6 +40,7 @@ public class PersonService implements UserDetailsService {
 
     public void register(Person person) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
+        person.setRole(Role.ROLE_USER);
         personRepository.save(person);
     }
 }
